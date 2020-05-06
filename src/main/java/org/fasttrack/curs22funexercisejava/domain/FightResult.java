@@ -1,10 +1,13 @@
 package org.fasttrack.curs22funexercisejava.domain;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@EqualsAndHashCode
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class FightResult {
-
     private String winner;
     private String loser;
 }

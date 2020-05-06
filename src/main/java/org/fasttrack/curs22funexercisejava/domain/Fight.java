@@ -1,27 +1,26 @@
 package org.fasttrack.curs22funexercisejava.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
-import javax.persistence.*;
-
-@Data
+@Getter
+@EqualsAndHashCode
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class Fight {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    private Hero firstFighter;
-    private Hero secondFighter;
+    private Integer firstFighter;
+    private Integer secondFighter;
     private FightResult result;
 
-    public Fight(Hero firstFighter, Hero secondFighter, FightResult result) {
-        this.firstFighter = firstFighter;
-        this.secondFighter = secondFighter;
-        this.result = result;
+    public Fight(@JsonProperty Integer firstFighter,
+                 @JsonProperty Integer secondFighter) {
+        this(0, firstFighter, secondFighter, new FightResult());
+    }
+
+    public Fight(Integer id, Integer firstFighter, Integer secondFighter) {
+        this(id, firstFighter, secondFighter, new FightResult());
     }
 }
