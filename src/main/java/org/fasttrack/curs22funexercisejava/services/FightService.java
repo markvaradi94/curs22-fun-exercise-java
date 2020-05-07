@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.*;
 public class FightService {
 
     private final HeroService heroService;
-    private List<Fight> fights = new ArrayList<>();
+    private final List<Fight> fights = new ArrayList<>();
 
     public FightService(HeroService heroService, FightReader reader) {
         this.heroService = heroService;
