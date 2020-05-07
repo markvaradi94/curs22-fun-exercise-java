@@ -70,7 +70,7 @@ public class FightService {
     }
 
     private int damagedStamina(Hero hero) {
-        double stamina = (hero.getStamina() - generateDamage() * hero.getSkill());
+        double stamina = hero.getStamina() - generateDamage() * hero.getSkill();
         return stamina > 0 ? (int) stamina : 0;
     }
 
