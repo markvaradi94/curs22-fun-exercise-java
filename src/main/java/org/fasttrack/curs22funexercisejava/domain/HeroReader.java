@@ -28,7 +28,7 @@ public class HeroReader {
     public List<Hero> read() {
         List<Hero> result = new ArrayList<>();
         try (InputStream inputStream = file.getInputStream()) {
-            Scanner scanner = new Scanner(file.getInputStream());
+            Scanner scanner = new Scanner(inputStream);
             scanner.useDelimiter("[|]");
             while (scanner.hasNextLine()) {
                 String[] tokens = scanner.nextLine().split("[|]");

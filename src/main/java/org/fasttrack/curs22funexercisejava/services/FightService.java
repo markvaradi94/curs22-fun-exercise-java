@@ -69,26 +69,26 @@ public class FightService {
         return Double.valueOf(df.format(random.nextDouble()));
     }
 
-    private int damagedStamina(Hero hero) {
-        double stamina = hero.getStamina() - generateDamage() * hero.getSkill();
+    private int damagedStamina(Hero hero1, Hero hero2) {
+        double stamina = hero1.getStamina() - generateDamage() * hero2.getSkill();
         return stamina > 0 ? (int) stamina : 0;
     }
 
     private Fight fightWithResult(Fight fight) {
         Hero hero1 = heroService.getHeroById(fight.getFirstFighter());
         Hero hero2 = heroService.getHeroById(fight.getSecondFighter());
-        Hero damagedHero1 = new Hero(hero1.getName(), hero1.getSkill(), damagedStamina(hero1));
-        Hero damagedHero2 = new Hero(hero2.getName(), hero2.getSkill(), damagedStamina(hero2));
+        Hero damagedHero1 = new Hero(hero1.getName(), hero1.getSkill(), damagedStamina(hero1, hero2));
+        Hero damagedHero2 = new Hero(hero2.getName(), hero2.getSkill(), damagedStamina(hero2, hero1));
         FightResult result;
 
         if (damagedHero1.getStamina() > damagedHero2.getStamina()) {
             result = new FightResult(damagedHero1.getName() + ", remaining stamina = " + damagedHero1.getStamina(),
                     damagedHero2.getName() + ", remaining stamina = " + damagedHero2.getStamina());
-            hero1.addWin();
+            heroService.addWinToHero(hero1);
         } else if (damagedHero1.getStamina() < damagedHero2.getStamina()) {
             result = new FightResult(damagedHero2.getName() + ", remaining stamina = " + damagedHero2.getStamina(),
                     damagedHero1.getName() + ", remaining stamina = " + damagedHero1.getStamina());
-            hero2.addWin();
+            heroService.addWinToHero(hero2);
         } else {
             result = new FightResult("Tie" + ", remaining stamina = " + damagedHero1.getStamina(),
                     "Tie" + ", remaining stamina = " + damagedHero2.getStamina());

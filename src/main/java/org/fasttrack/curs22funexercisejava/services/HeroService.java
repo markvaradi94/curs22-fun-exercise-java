@@ -51,6 +51,10 @@ public class HeroService {
         return newHero;
     }
 
+    public void addWinToHero(Hero hero) {
+        hero.addWin();
+    }
+
     private Hero getOrThrow(Integer id) {
         return heroes.stream()
                 .filter(hero -> hero.getId().equals(id))
